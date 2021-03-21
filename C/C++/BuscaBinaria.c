@@ -18,7 +18,6 @@ int main(int argc, char**argv)
 {
 	FILE *arquivo;
 	Endereco e;
-	int quantidade;
 	int contador;
 	long tamanhoArquivo, posicao, inicio, fim, meio;
 
@@ -42,18 +41,21 @@ int main(int argc, char**argv)
 	while(inicio<=fim){ // repete as comparacoes ate que nao ache o valor no ultimo restante
 		contador++; // atualiza o valor do contador
 		meio = (inicio+fim)/2; //  meio seria metade do valor da soma do inicial com a ultima 
-        fseek(arquivo, meio * sizeof(Endereco), SEEK_SET); // move para o meio do arquivo
-		fread(&e,sizeof(Endereco),1,arquivo);
-		if(strncmp(argv[1],e.cep,8)==0) // if(argv[1] == e.cep)
+        fseek(arquivo, meio * sizeof(Endereco), SEEK_SET); // move para o inicio do registro no meio do arquivo
+		//printf("Posicao Atual: %ld\n", ftell(arquivo)); // pode ser usado para informar a posicao da cabeca de leitura a cada movimento seu
+		fread(&e,sizeof(Endereco),1,arquivo); // le o registro inteiro
+		if(strncmp(argv[1],e.cep,8)==0) // if(argv[1] == e.cep) compara o cep procurado com o cep no registro lido
 		{
-			printf("%.72s\n%.72s\n%.72s\n%.72s\n%.2s\n%.8s\n",e.logradouro,e.bairro,e.cidade,e.uf,e.sigla,e.cep);
+			printf("%.72s\n%.72s\n%.72s\n%.72s\n%.2s\n%.8s\n",e.logradouro,e.bairro,e.cidade,e.uf,e.sigla,e.cep); //imprime todas as informacoes do cep requisitado
+			fseek(arquivo, -1 * sizeof(Endereco), SEEK_CUR); // retorna a cabeca de leitura ao inicio do registro onde foi encontrado o cep
+			printf("Posicao Atual: %ld\n", ftell(arquivo)); // imprime a posicao em bytes do inicio do registro onde foi encontrado o cep 
 			break;
 		}
-	    else if(strncmp(argv[1],e.cep,8)>0)// caso o procurado seja maior que o corrente
+	    else if(strncmp(argv[1],e.cep,8)>0)// caso o cep procurado seja maior que o corrente
 		{
 		  inicio=meio+1; //o novo inicio se torna o registro imediatamente superior ao meio atual
 		}
-		else if(strncmp(argv[1],e.cep,8)<0)// caso o procurado seja menor que o corrente 
+		else if(strncmp(argv[1],e.cep,8)<0)// caso o cep procurado seja menor que o corrente 
 		{
 		  fim=meio-1; // o novo fim se torna o registro imediatamente anterior ao meio atual
 		}
