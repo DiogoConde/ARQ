@@ -46,22 +46,22 @@ int main(int argc, char**argv)
   
       }
       qsort(w,fracaoArquivo,sizeof(Endereco),comparar); // ordena os endereços presentes na fração do arquivo
-      printf("O %d arquivo foi ordenado\n", i); // informa o arquivo recentemente ordenado
+      printf("O %do arquivo já está ordenado\n", i); // informa o arquivo recentemente ordenado
       sprintf(file1,"cep%d.dat",i); // armazena o arquivo ordenado com nome Cep.dat na ordem de criação dos arquivos ordenados
       output = fopen(file1,"w"); // abre um arquivo vazio onde serão escritos os ceps ordenados
       fwrite(w,sizeof(Endereco),fracaoArquivo,output); // escreve no novo arquivo as informações dos ceps ordenados
       fclose(output); // fecha o arquivo onde foi realizada a escrita
-      printf("Foi escrito no arquivo %d\n", i); // informa onde foi escrito 
+      printf("Foi escrito no %do arquivo\n", i); // informa onde foi escrito 
       i++; // soma 1 ao valor de i
 
 }
 fclose(f); // fecha o arquivo
 
-int n=2,m=9;
+int n=2,m=17;
 
 i=1; // reseta a variável i com valor 1
 
-while(m<=24) // executa os comandos 16 vezes
+while(m<=31) // executa os comandos 16 vezes
 { 
     sprintf(file1,"cep%d.dat",i); // guarda os arquivos com numeração ímpar
     sprintf(file2,"cep%d.dat",n); // guarda os arquivos com numeração par
@@ -102,9 +102,9 @@ while(m<=24) // executa os comandos 16 vezes
     i+=2; // são somadas duas unidades ao valor de i para que lide com os arquivos ímpares
     n+=2; // são somadas duas unidades ao valor de i para que lide com os arquivos pares
     m++; // é somado 1 ao valor de m
-    if(m==16){//Depois de criados 8 ceps é aumentado o valor de i e n para intercalar 8 ceps em 4, 4 ceps em 2, e 2 em 1
-    	i=17;
-    	n=18;
+    if(m==24){//Depois de criados 8 ceps é aumentado o valor de i e n para intercalar 8 ceps em 4, 4 ceps em 2, e 2 em 1
+    	i=16;
+    	n=17;
     }
     fclose(a);
     fclose(f); // são fechados os arquivos f, a e output
@@ -112,11 +112,5 @@ while(m<=24) // executa os comandos 16 vezes
 
 }
 i=1; // i é resetado com valor 1
-sprintf(file1,"cep%d.dat",i); 
-while(i<14)
-{
-remove(file1);
-i++;
-sprintf(file1,"cep%d.dat",i);  
-}
+sprintf(file1,"cep%d.dat",i); // guarda todos os arquivos gerados
 }
