@@ -39,7 +39,7 @@ int main(int argc, char**argv)
     while(i<=16) // repete até executar 16 vezes
     { 
 
-        w = (Endereco*) malloc(fracaoArquivo*sizeof(Endereco));// armazena na variável "e" o lugar onde foi alocado espaço do tamanho da fração do arquivo 
+        w = (Endereco*) malloc(fracaoArquivo*sizeof(Endereco));// armazena na variável w o lugar onde foi alocado espaço do tamanho da fração do arquivo 
         if(fread(w,sizeof(Endereco),fracaoArquivo,f) == fracaoArquivo) // verifica se o endereço descrito em "e" foi lido
         {
               printf("O %d arquivo foi lido\n", i);// informa a leitura de uma fração do arquivo
@@ -96,12 +96,12 @@ int main(int argc, char**argv)
              fwrite(&h,sizeof(Endereco),1,output);
              fread(&h,sizeof(Endereco),1,a);
 
-        } //os 2 arquivos selecionados estão combinados
+        } // os 2 arquivos selecionados estão combinados
 
         i+=2; // são somadas duas unidades ao valor de i para que lide com os arquivos ímpares
         n+=2; // são somadas duas unidades ao valor de i para que lide com os arquivos pares
         m++; // é somado 1 ao valor de m
-        if(m==24)//Depois de criados 8 ceps é aumentado o valor de i e n para intercalar 8 ceps em 4, 4 ceps em 2, e 2 em 1
+        if(m==24)// depois de criados 8 ceps é aumentado o valor de i e n para intercalar 8 ceps em 4, 4 ceps em 2, e 2 em 1
         {
     	i=16;
     	n=17;
