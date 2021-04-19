@@ -51,7 +51,7 @@ int main(int argc, char**argv)
       output = fopen(file1,"w"); // abre um arquivo vazio onde serão escritos os ceps ordenados
       fwrite(w,sizeof(Endereco),fracaoArquivo,output); // escreve no novo arquivo as informações dos ceps ordenados
       fclose(output); // fecha o arquivo onde foi realizada a escrita
-      printf("Foi escrito no %do arquivo\n", i); // informa onde foi escrito 
+      printf("Foi escrito no %do arquivo\n", i); // informa o arquivo onde foi escrito 
       i++; // soma 1 ao valor de i
 
 }
